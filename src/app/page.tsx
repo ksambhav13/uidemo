@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default withAuth(function Home() {
   const { user, setUser } = useAuth();
-  const signOut = () => {
+  const logout = () => {
     axios.post("/api/auth/logout").then(() => {
       setUser(null);
     });
@@ -15,7 +15,7 @@ export default withAuth(function Home() {
     <main>
       Welcome {user?.username} to the app!
       <div>
-        <Button onClick={signOut}>Sign Out</Button>
+        <Button onClick={logout}>Sign Out</Button>
       </div>
     </main>
   );
