@@ -30,7 +30,7 @@ type Inputs = {
   password: string;
 };
 
-export const App = () => {
+const LoginPage = () => {
   const { user, setUser } = useAuth();
   const router = useRouter();
   const {
@@ -120,3 +120,5 @@ export const App = () => {
     </Container>
   );
 };
+
+export default LoginPage;
