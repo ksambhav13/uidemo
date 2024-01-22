@@ -1,19 +1,5 @@
 "use client";
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  Divider,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, Link } from "@chakra-ui/react";
 
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -24,6 +10,19 @@ import { useAuth } from "@/AuthContext";
 import { Logo } from "./Logo";
 import { OAuthButtonGroup } from "./OAuthButtonGroup";
 import { PasswordField } from "./PasswordField";
+import {
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  Separator,
+  Text,
+  TextField,
+} from "@radix-ui/themes";
 
 type Inputs = {
   username: string;
@@ -60,63 +59,80 @@ const LoginPage = () => {
   }
   return (
     <Container
-      maxW="lg"
-      py={{ base: "12", md: "24" }}
-      px={{ base: "0", sm: "8" }}
+      size="1"
+      py={{ initial: "2", md: "6" }}
+      px={{ initial: "0", sm: "2" }}
     >
-      <Stack spacing="8">
-        <Stack spacing="6">
-          <Logo />
-          <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
-            <Heading size={{ base: "xs", md: "sm" }}>
+      <Grid gap="8">
+        <Grid gap="2">
+          <Flex gap={{ initial: "2", md: "3" }} align="center" justify="center">
+            <Logo />
+          </Flex>
+          <Flex gap={{ initial: "2", md: "3" }} align="center" justify="center">
+            <Heading size={{ base: "xs", md: "sm" }} textAlign="center">
               Log in to your account
             </Heading>
-            <Text color="fg.muted">
+          </Flex>
+          <Flex gap={{ initial: "2", md: "3" }} align="center" justify="center">
+            <Text>
               Don't have an account? <Link href="#">Sign up</Link>
             </Text>
-          </Stack>
-        </Stack>
-        <Box
-          py={{ base: "0", sm: "8" }}
-          px={{ base: "4", sm: "10" }}
+          </Flex>
+        </Grid>
+        <Card
           bg={{ base: "transparent", sm: "bg.surface" }}
           boxShadow={{ base: "none", sm: "md" }}
           borderRadius={{ base: "none", sm: "xl" }}
         >
-          <Stack spacing="6">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack spacing="5">
-                <Stack spacing="5">
-                  <FormControl>
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <Input id="email" type="email" {...register("username")} />
-                  </FormControl>
-                  <PasswordField {...register("password")} />
-                </Stack>
-                <HStack justify="space-between">
-                  <Checkbox defaultChecked>Remember me</Checkbox>
-                  <Button variant="text" size="sm">
-                    Forgot password?
-                  </Button>
-                </HStack>
-                <Stack spacing="6">
-                  <Button type="submit">Sign in</Button>
-                </Stack>
-              </Stack>
-            </form>
-            <Stack spacing="6">
-              <HStack>
-                <Divider />
-                <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
-                  or continue with
-                </Text>
-                <Divider />
-              </HStack>
-              <OAuthButtonGroup />
-            </Stack>
-          </Stack>
-        </Box>
-      </Stack>
+          <Box py="2" px="4">
+            <Grid gap="6">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Grid gap="5">
+                  <Grid gap="5">
+                    <FormControl>
+                      <FormLabel htmlFor="email">Email</FormLabel>
+                      <TextField.Input
+                        size="3"
+                        id="email"
+                        type="email"
+                        {...register("username")}
+                      />
+                    </FormControl>
+                    <PasswordField {...register("password")} />
+                  </Grid>
+                  <Flex justify="between">
+                    <Text as="label" size="2">
+                      <Flex gap="2">
+                        <Checkbox defaultChecked /> Remember me
+                      </Flex>
+                    </Text>
+                    <Button variant="ghost" size="1">
+                      Forgot password?
+                    </Button>
+                  </Flex>
+                  <Grid gap="6">
+                    <Button type="submit" size="3">
+                      Sign in
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+              <Grid gap="6">
+                <Grid columns="3" align="center" gap="3">
+                  <Separator size="4" />
+                  <Box>
+                    <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
+                      or continue with
+                    </Text>
+                  </Box>
+                  <Separator size="4" />
+                </Grid>
+                <OAuthButtonGroup />
+              </Grid>
+            </Grid>
+          </Box>
+        </Card>
+      </Grid>
     </Container>
   );
 };

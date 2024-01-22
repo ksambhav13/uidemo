@@ -1,7 +1,7 @@
 "use client";
 import { useAuth } from "@/AuthContext";
 import withAuth from "@/withAuth";
-import { Button } from "@chakra-ui/react";
+import { Button } from "@radix-ui/themes";
 import axios from "axios";
 
 export default withAuth(function Home() {
